@@ -7,7 +7,17 @@ import { NextResponse } from "next/server";
 
 // GET /api/partner-profile/programs/[programId]/analytics – get analytics for a program enrollment link
 export const GET = withPartnerProfile(
-  async ({ partner, params, searchParams }) => {
+  async ({
+    partner,
+    params,
+    searchParams,
+  }: {
+    // FIX: Explicitly define types for the function arguments
+    // to resolve the TypeScript build error.
+    partner: any;
+    params: { programId: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+  }) => {
     const { program } = await getProgramEnrollmentOrThrow({
       partnerId: partner.id,
       programId: params.programId,
